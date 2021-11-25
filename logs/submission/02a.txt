@@ -1,0 +1,7 @@
+[2021-11-24 15:27:17.061578989 EST]
+Submission: 5704
+Status: Correct
+Raw: <p>That&#39;s the right answer!  You are <span class="day-success">one gold star</span> closer to fixing the time stream. <a href="/2018/day/2#part2">[Continue to Part Two]</a></p>
+
+> That's the right answer! You are one gold star closer to fixing the time
+> stream. [Continue to Part Two]
