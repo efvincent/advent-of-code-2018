@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wno-unused-imports   #-}
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
-
+{-# LANGUAGE LambdaCase #-}
 -- |
 -- Module      : AOC.Challenge.Day01
 -- License     : BSD3
@@ -22,22 +22,42 @@
 --     will recommend what should go in place of the underscores.
 
 module AOC.Challenge.Day01 (
-    -- day01a
-  -- , day01b
+    day01a
+  , day01b
   ) where
 
-import           AOC.Prelude
+import AOC.Solver
+import Data.IntSet (fromList, member, insert, singleton)
 
-day01a :: _ :~> _
+dep :: String -> Int
+dep = read . \case {
+    '+':rest -> rest;
+    x -> x
+  }
+
+p2 :: [Int] -> Int
+p2 nums =
+  go (singleton 0) 0 (cycle nums)
+  where
+    go seen cur xs =
+      if member y seen 
+        then y 
+        else go (insert y seen) y rest
+      where
+        y = head xs + cur
+        rest = tail xs
+
+
+day01a :: [Int] :~> Int
 day01a = MkSol
-    { sParse = Just
+    { sParse = Just . map dep . lines
     , sShow  = show
-    , sSolve = Just
+    , sSolve = Just . sum
     }
 
-day01b :: _ :~> _
+day01b :: [Int] :~> Int
 day01b = MkSol
-    { sParse = Just
+    { sParse = Just . map dep . lines
     , sShow  = show
-    , sSolve = Just
+    , sSolve = Just . p2 
     }
