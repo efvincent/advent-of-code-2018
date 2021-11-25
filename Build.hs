@@ -28,19 +28,19 @@ import qualified HTMLEntities.Text                      as H
 
 -- CONSTANTS
 year :: Integer
-year = 2019
+year = 2018
 github :: String
-github = "mstksg"
+github = "efvincent"
 otherYears :: S.Set Integer
-otherYears = S.fromList [2016 .. 2019]
+otherYears = S.fromList [2016 .. 2021]
 
 ctx0 :: M.Map Text Text
 ctx0 = M.fromList [
     ("year"  , T.pack (show year)                                   )
   , ("github", T.pack github                                        )
-  , ("name"  , "Justin Le"                                          )
-  , ("email" , "justin@jle.im"                                      )
-  , ("rss"   , "http://feeds.feedburner.com/jle-advent-of-code-2019")
+  , ("name"  , "Eric Vincent"                                       )
+--  , ("email" , "justin@jle.im"                                      )
+--  , ("rss"   , "http://feeds.feedburner.com/jle-advent-of-code-2019")
   , ("other_years", yearLinks                                       )
   ]
 
@@ -195,14 +195,14 @@ yearLinks  = T.intercalate " / " . flip map (S.toList otherYears) $ \oy ->
 
 mkLinks :: Int -> Bool -> [String]
 mkLinks d hasRef = catMaybes [
-    Just $ printf "[d%02dg]: https://github.com/mstksg/advent-of-code-%04d/blob/master/src/AOC/Challenge/Day%02d.hs"
+    Just $ printf "[d%02dg]: https://github.com/efvincent/advent-of-code-%04d/blob/master/src/AOC/Challenge/Day%02d.hs"
       d year d
-  , Just $ printf "[d%02dh]: https://mstksg.github.io/advent-of-code-%04d/src/AOC.Challenge.Day%02d.html"
+  , Just $ printf "[d%02dh]: https://efvincent.github.io/advent-of-code-%04d/src/AOC.Challenge.Day%02d.html"
       d year d
   , do guard hasRef
-       Just $ printf "[d%02dr]: https://github.com/mstksg/advent-of-code-%04d/blob/master/reflections.md#day-%d"
+       Just $ printf "[d%02dr]: https://github.com/efvincent/advent-of-code-%04d/blob/master/reflections.md#day-%d"
          d year d
-  , Just $ printf "[d%02db]: https://github.com/mstksg/advent-of-code-%04d/blob/master/reflections.md#day-%d-benchmarks"
+  , Just $ printf "[d%02db]: https://github.com/efvincent/advent-of-code-%04d/blob/master/reflections.md#day-%d-benchmarks"
       d year d
   ]
 

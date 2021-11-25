@@ -4,10 +4,10 @@ module AOC.Util.DynoMap (
   , lookupDynoWith
   ) where
 
-import           Control.Monad
-import           Data.Dynamic
-import           Data.Map      (Map)
-import           Data.Maybe
+import Control.Monad ( (<=<) )
+import Data.Dynamic ( Typeable, fromDynamic, Dynamic )
+import Data.Map (Map)
+import Data.Maybe ( fromMaybe )
 import qualified Data.Map      as M
 
 newtype DynoMap = Dyno { runDyno :: Map String Dynamic }

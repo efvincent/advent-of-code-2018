@@ -1,6 +1,8 @@
 {-# LANGUAGE OverloadedStrings              #-}
 {-# OPTIONS_GHC -Werror=incomplete-patterns #-}
 
+module Main (main) where
+
 import           AOC
 import           Control.Applicative
 import           Control.DeepSeq
@@ -33,7 +35,7 @@ main = do
     inputCache <- newIORef Nothing
     O{..} <- execParser $ info (parseOpts inputCache <**> helper)
                 ( fullDesc
-               <> header "aoc-dev - Advent of Code interactive development environment"
+               <> header "aoc-2018 - Advent of Code interactive development environment"
                <> progDesc ("Run, test, bench, challenges from Advent of Code, and view prompts. Available days: " ++ availableDays)
                 )
     cfg <- configFile $ fromMaybe defConfPath _oConfig
