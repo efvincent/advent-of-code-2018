@@ -15,7 +15,7 @@ module AOC.Challenge.Day02 (
    , day02b
   ) where
 
-import AOC.Prelude ( (:~>)(..), Map, isNothing ) 
+import AOC.Prelude ( (:~>)(..), Map, isNothing )
 import Data.Map as M (toList, empty, lookup, insert)
 
 -- | Finds the frequencies of elements in a list
@@ -28,7 +28,7 @@ freqs values =
       Nothing -> go xs (M.insert x 1 m)
       Just freq -> go xs (M.insert x (freq + 1) m)
 
--- | Returns a list of target Frequencies (2 or 3 in this case) 
+-- | Returns a list of target Frequencies (2 or 3 in this case)
 -- | found in the list.
 toFreqs :: Ord a => [a] -> [Int]
 toFreqs = map fst . M.toList . freqs . filter (\n -> n == 2 || n == 3) . map snd . M.toList . freqs
@@ -37,12 +37,12 @@ toFreqs = map fst . M.toList . freqs . filter (\n -> n == 2 || n == 3) . map snd
 -- | of the differing element. Otherwise nothing
 diffByOne :: Eq a => [a] -> [a] -> Maybe Int
 diffByOne =
-  go 0 Nothing 
+  go 0 Nothing
   where
     go _ b [] [] = b
-    go i d (x1:xs1) (x2:xs2)  
-      | x1 == x2                = go (i+1) d        xs1 xs2   
-      | isNothing d && x1 /= x2 = go 0     (Just i) xs1 xs2    
+    go i d (x1:xs1) (x2:xs2)
+      | x1 == x2                = go (i+1) d        xs1 xs2
+      | isNothing d && x1 /= x2 = go 0     (Just i) xs1 xs2
       | otherwise = Nothing
     go _ _ _ _ = Nothing
 
@@ -55,14 +55,14 @@ solve2b s =
   where
     go = \case {
       (c1:cs1, c2:cs2) | c1 == c2 -> go (c1:cs1, cs2);
-      (c1:cs1, c2:cs2) -> 
+      (c1:cs1, c2:cs2) ->
         (case diffByOne c1 c2 of
           Just n -> take n c1 ++ drop (n + 1) c1
           Nothing -> go (c1:cs1, cs2));
       (_:c2:cs1, [])             -> go (c2:cs1, cs1);
       _                          -> error "no two string differ by exactly one character";
     }
-       
+
 day02a :: [String] :~> Int
 day02a = MkSol
     { sParse = Just . lines
