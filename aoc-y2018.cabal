@@ -172,6 +172,7 @@ executable aoc-2018
     , deepseq
     , finite-typelits
     , microlens
+    , microlens-th
     , mtl
     , split
     , optparse-applicative
