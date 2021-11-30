@@ -129,7 +129,10 @@ parse s =
         -- sleep range, and add it to the guard in the dictionary (adding the guard if not
         -- already in the dictionary)
           let guardMap = pstate ^. guards in
-          let Just(curGuardId,sleepStarted) = pstate ^. sleepStart in
+          let (curGuardId,sleepStarted) =
+                case pstate ^. sleepStart of
+                  Just(cid, ss) -> (cid, ss)
+                  Nothing -> error "no current guard when we saw a WakesUp event" in
           let newRange = Range (sleepStarted, dt) in
           let g = case M.lookup curGuardId guardMap of
                     Just g' -> Guard curGuardId (newRange : (g' ^. ranges))
